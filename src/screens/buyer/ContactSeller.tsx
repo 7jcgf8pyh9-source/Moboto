@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppTopNav } from "../../components/app-chrome/AppTopNav";
+import { PushScreen } from "../../components/app-chrome/ScreenShell";
 import {
   WButton,
   WCard,
@@ -31,57 +31,60 @@ export default function ContactSeller() {
   }
 
   return (
-    <div className="flex h-full flex-col">
-      <AppTopNav active="buy" />
-      <div className="flex-1 overflow-y-auto bg-ink-50 px-10 py-10">
-        <div className="mx-auto grid max-w-3xl grid-cols-3 gap-6">
-          <WCard className="col-span-1 h-fit">
-            <WImagePlaceholder label="CAR PHOTO" ratio="4/3" className="mb-3" />
+    <PushScreen
+      title="Contact seller"
+      noPadding
+      footer={
+        <>
+          <p className="mb-2 text-center text-[10px] text-ink-400">
+            Your contact info is shared only after the seller replies.
+          </p>
+          <WButton full size="lg" onClick={() => navigate("/buyer/dashboard")}>
+            Send message
+          </WButton>
+        </>
+      }
+    >
+      <div className="px-4 py-4">
+        <WCard className="mb-4 flex items-center gap-3">
+          <WImagePlaceholder label="CAR" ratio="4/3" className="w-16 shrink-0" />
+          <div>
             <p className="text-sm font-semibold text-ink-900">2021 Honda Civic EX</p>
-            <p className="text-lg font-bold text-ink-900">$19,400</p>
+            <p className="text-base font-bold text-ink-900">$19,400</p>
             <p className="text-xs text-ink-500">Austin, TX</p>
-          </WCard>
+          </div>
+        </WCard>
 
-          <WCard className="col-span-2">
-            <div className="mb-4 flex items-center gap-3">
-              <WAvatar initials="MJ" size={40} />
-              <div>
-                <p className="text-sm font-semibold text-ink-900">Message Morgan J.</p>
-                <p className="text-xs text-ink-500">Typically responds within ~2 hours</p>
-              </div>
-            </div>
-
-            <AnnotationLabel className="mb-2 block">Quick questions</AnnotationLabel>
-            <div className="mb-4 flex flex-wrap gap-2">
-              {QUICK_QUESTIONS.map((q) => (
-                <button
-                  key={q}
-                  onClick={() => toggleChip(q)}
-                  className={cx(
-                    "rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
-                    selected.includes(q)
-                      ? "border-ink-900 bg-ink-900 text-white"
-                      : "border-ink-300 text-ink-600 hover:border-ink-500",
-                  )}
-                >
-                  {q}
-                </button>
-              ))}
-            </div>
-
-            <WField label="Your message">
-              <WTextarea rows={5} value={message} onChange={(e) => setMessage(e.target.value)} />
-            </WField>
-
-            <div className="mt-5 flex items-center justify-between">
-              <p className="text-[11px] text-ink-400">
-                Your contact info is shared only after the seller replies.
-              </p>
-              <WButton onClick={() => navigate("/buyer/dashboard")}>Send message</WButton>
-            </div>
-          </WCard>
+        <div className="mb-4 flex items-center gap-3">
+          <WAvatar initials="MJ" size={36} />
+          <div>
+            <p className="text-sm font-semibold text-ink-900">Message Morgan J.</p>
+            <p className="text-xs text-ink-500">Typically responds within ~2 hours</p>
+          </div>
         </div>
+
+        <AnnotationLabel className="mb-2 block">Quick questions</AnnotationLabel>
+        <div className="mb-4 flex flex-wrap gap-2">
+          {QUICK_QUESTIONS.map((q) => (
+            <button
+              key={q}
+              onClick={() => toggleChip(q)}
+              className={cx(
+                "rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
+                selected.includes(q)
+                  ? "border-ink-900 bg-ink-900 text-white"
+                  : "border-ink-300 text-ink-600",
+              )}
+            >
+              {q}
+            </button>
+          ))}
+        </div>
+
+        <WField label="Your message">
+          <WTextarea rows={5} value={message} onChange={(e) => setMessage(e.target.value)} />
+        </WField>
       </div>
-    </div>
+    </PushScreen>
   );
 }

@@ -1,6 +1,25 @@
 import React from "react";
 import { cx } from "./primitives";
 
+/** Compact mobile step indicator: thin segmented progress bar + "Step X of N" label. */
+export function MobileSteps({ total, current, label }: { total: number; current: number; label: string }) {
+  return (
+    <div className="px-4 pb-3 pt-3">
+      <div className="mb-2 flex gap-1.5">
+        {Array.from({ length: total }).map((_, i) => (
+          <div
+            key={i}
+            className={cx("h-1 flex-1 rounded-full", i <= current ? "bg-ink-900" : "bg-ink-200")}
+          />
+        ))}
+      </div>
+      <p className="text-[11px] font-medium text-ink-400">
+        Step {current + 1} of {total} — {label}
+      </p>
+    </div>
+  );
+}
+
 export function WStepper({
   steps,
   current,

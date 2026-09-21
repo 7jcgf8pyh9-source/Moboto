@@ -1,10 +1,9 @@
 import React from "react";
-import { AppTopNav } from "../../components/app-chrome/AppTopNav";
+import { PushScreen } from "../../components/app-chrome/ScreenShell";
 import {
   WButton,
   WCard,
   WBadge,
-  SectionTitle,
   AnnotationLabel,
   WDivider,
 } from "../../components/ui/primitives";
@@ -17,44 +16,40 @@ const ALERTS = [
 
 export default function SavedSearchAlerts() {
   return (
-    <div className="flex h-full flex-col">
-      <AppTopNav active="buy" />
-      <div className="flex-1 overflow-y-auto bg-ink-50 px-10 py-8">
-        <div className="mb-1 flex items-center gap-2">
-          <WBadge tone="r2">Release 2</WBadge>
-        </div>
-        <SectionTitle>Saved search alerts</SectionTitle>
-        <p className="mb-6 mt-1 text-xs text-ink-500">
-          Get notified the moment a matching car is listed — no need to keep re-searching.
-        </p>
-
-        <div className="flex flex-col gap-3">
-          {ALERTS.map((alert) => (
-            <WCard key={alert.name}>
-              <div className="flex items-start justify-between">
-                <div>
-                  <div className="mb-1 flex items-center gap-2">
-                    <p className="text-sm font-semibold text-ink-900">{alert.name}</p>
-                    {alert.matches > 0 && <WBadge tone="success">{alert.matches} new</WBadge>}
-                  </div>
-                  <p className="text-xs text-ink-500">{alert.criteria}</p>
-                </div>
-                <label className="flex items-center gap-2 text-xs text-ink-500">
-                  <input type="checkbox" defaultChecked={alert.active} className="h-4 w-4 rounded-sm border-ink-400" />
-                  Active
-                </label>
-              </div>
-              <WDivider className="my-3" />
-              <div className="flex items-center justify-between">
-                <AnnotationLabel>Notify via email + push</AnnotationLabel>
-                <WButton size="sm" variant="outline">
-                  View matches
-                </WButton>
-              </div>
-            </WCard>
-          ))}
-        </div>
+    <PushScreen title="Saved search alerts">
+      <div className="mb-1">
+        <WBadge tone="r2">Release 2</WBadge>
       </div>
-    </div>
+      <p className="mb-4 mt-2 text-xs text-ink-500">
+        Get notified the moment a matching car is listed — no need to keep re-searching.
+      </p>
+
+      <div className="flex flex-col gap-3">
+        {ALERTS.map((alert) => (
+          <WCard key={alert.name}>
+            <div className="mb-2 flex items-start justify-between gap-2">
+              <div>
+                <div className="mb-1 flex items-center gap-1.5">
+                  <p className="text-[13px] font-semibold text-ink-900">{alert.name}</p>
+                  {alert.matches > 0 && <WBadge tone="success">{alert.matches} new</WBadge>}
+                </div>
+                <p className="text-[11px] text-ink-500">{alert.criteria}</p>
+              </div>
+              <label className="flex shrink-0 items-center gap-1.5 text-[11px] text-ink-500">
+                <input type="checkbox" defaultChecked={alert.active} className="h-3.5 w-3.5 rounded-sm border-ink-400" />
+                Active
+              </label>
+            </div>
+            <WDivider className="my-2.5" />
+            <div className="flex items-center justify-between">
+              <AnnotationLabel>Email + push</AnnotationLabel>
+              <WButton size="sm" variant="outline">
+                View matches
+              </WButton>
+            </div>
+          </WCard>
+        ))}
+      </div>
+    </PushScreen>
   );
 }

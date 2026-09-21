@@ -12,7 +12,7 @@ export function DocsPanel() {
   const screen = getScreenByPath(location.pathname);
 
   return (
-    <aside className="flex h-full w-[400px] shrink-0 flex-col border-r border-ink-200 bg-white">
+    <aside className="flex h-full w-[460px] shrink-0 flex-col border-r border-ink-200 bg-white">
       <div className="flex-1 overflow-y-auto scrollbar-thin px-6 py-6">
         {screen ? (
           <>

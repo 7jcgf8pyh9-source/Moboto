@@ -222,6 +222,31 @@ export function WCheckbox({ label }: { label: string }) {
   );
 }
 
+export function WChip({
+  children,
+  active,
+  onClick,
+  className,
+}: {
+  children: React.ReactNode;
+  active?: boolean;
+  onClick?: () => void;
+  className?: string;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={cx(
+        "shrink-0 whitespace-nowrap rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
+        active ? "border-ink-900 bg-ink-900 text-white" : "border-ink-300 text-ink-600",
+        className,
+      )}
+    >
+      {children}
+    </button>
+  );
+}
+
 export function WDivider({ className }: { className?: string }) {
   return <div className={cx("h-px w-full bg-ink-200", className)} />;
 }
@@ -292,10 +317,16 @@ export function WImagePlaceholder({
   ratio?: string;
   className?: string;
 }) {
+  // Tailwind's generated stylesheet orders utilities by its own internal scale, not by
+  // source order, so a plain cx() can't let a passed-in `w-*` override a default `w-full`.
+  // Only fall back to the default when the caller didn't specify a width themselves.
+  const hasWidthOverride = className ? /\bw-\S+/.test(className) : false;
+
   return (
     <div
       className={cx(
-        "relative flex w-full items-center justify-center overflow-hidden rounded-sm border border-ink-300 bg-[repeating-linear-gradient(135deg,#e6e8eb,#e6e8eb_8px,#eef0f2_8px,#eef0f2_16px)]",
+        "relative flex items-center justify-center overflow-hidden rounded-sm border border-ink-300 bg-[repeating-linear-gradient(135deg,#e6e8eb,#e6e8eb_8px,#eef0f2_8px,#eef0f2_16px)]",
+        !hasWidthOverride && "w-full",
         className,
       )}
       style={{ aspectRatio: ratio }}

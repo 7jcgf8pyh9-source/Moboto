@@ -143,7 +143,7 @@ export const SCREENS: ScreenDefinition[] = [
     purpose:
       "Lets buyers narrow a large inventory down to a shortlist using filters that match how people actually shop for cars (budget, body type, mileage, distance) rather than generic e-commerce filters.",
     keyDecisions: [
-      "Filters live in a persistent left rail, not a modal — buyers refine iteratively and need to see filter state at all times.",
+      "Filters open in a bottom sheet triggered by a filter button, not a separate screen — keeps results visible underneath and refining feels reversible.",
       "Result count updates contextually in the header so users always know how narrow/broad their search is before opening a listing.",
     ],
     flowNote: "Listing card → Listing Detail. Save search icon → Saved Search Alerts (R2).",
@@ -159,7 +159,7 @@ export const SCREENS: ScreenDefinition[] = [
     purpose:
       "The moment of truth: everything a buyer needs to decide whether to engage with a seller lives here — photos, specs, history, price context and seller trust signals.",
     keyDecisions: [
-      "Contact/inquiry action is sticky in view at all times (right rail) — the highest-value action should never require scrolling to find.",
+      "Contact/inquiry action is pinned as a full-width bar at the bottom of the screen — the thumb zone — so the highest-value action is always one tap away, never buried by scrolling.",
       "Seller trust block (verified, rating, response time) sits next to the price, not buried below — trust and price are the two things buyers weigh together.",
     ],
     flowNote: "Contact Seller CTA → Contact Seller. Save icon → Favorites.",
@@ -191,7 +191,7 @@ export const SCREENS: ScreenDefinition[] = [
     purpose:
       "Lets buyers build a shortlist over multiple sessions — car buying is rarely a single-visit decision, so persistence and easy comparison matter.",
     keyDecisions: [
-      "Grid view mirrors search results exactly for visual consistency — no new card pattern to learn.",
+      "A two-column grid packs more cars into one screen than a single-column list, without shrinking photos so small they stop being useful for comparison.",
       "Price-drop and status-change indicators are built into the card, turning a static list into something worth revisiting.",
     ],
     component: Favorites,

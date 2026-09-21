@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { AppTopNav } from "../../components/app-chrome/AppTopNav";
+import { PushScreen } from "../../components/app-chrome/ScreenShell";
 import {
   WButton,
   WCard,
   WBadge,
-  SectionTitle,
   AnnotationLabel,
   WImagePlaceholder,
   cx,
@@ -18,65 +17,56 @@ export default function ScheduleTestDrive() {
   const [slot, setSlot] = useState(SLOTS[2]);
 
   return (
-    <div className="flex h-full flex-col">
-      <AppTopNav active="buy" />
-      <div className="flex-1 overflow-y-auto bg-ink-50 px-10 py-10">
-        <div className="mx-auto max-w-2xl">
-          <div className="mb-4 flex items-center gap-2">
-            <WBadge tone="r3">Release 3</WBadge>
-          </div>
-          <SectionTitle className="mb-1">Schedule a test drive</SectionTitle>
-          <p className="mb-6 text-xs text-ink-500">
-            Pick from Morgan's actual availability — no back-and-forth needed.
-          </p>
-
-          <WCard className="mb-4 flex items-center gap-3">
-            <WImagePlaceholder label="CAR" ratio="4/3" className="w-20" />
-            <div>
-              <p className="text-sm font-semibold text-ink-900">2021 Honda Civic EX</p>
-              <p className="text-xs text-ink-500">Meets at seller's location · Austin, TX</p>
-            </div>
-          </WCard>
-
-          <WCard>
-            <AnnotationLabel className="mb-3 block">Choose a day</AnnotationLabel>
-            <div className="mb-5 grid grid-cols-5 gap-2">
-              {DAYS.map((d) => (
-                <button
-                  key={d}
-                  onClick={() => setDay(d)}
-                  className={cx(
-                    "rounded-sm border py-2 text-xs font-medium",
-                    day === d ? "border-ink-900 bg-ink-900 text-white" : "border-ink-300 text-ink-600 hover:border-ink-500",
-                  )}
-                >
-                  {d}
-                </button>
-              ))}
-            </div>
-
-            <AnnotationLabel className="mb-3 block">Choose a time</AnnotationLabel>
-            <div className="mb-6 grid grid-cols-5 gap-2">
-              {SLOTS.map((s) => (
-                <button
-                  key={s}
-                  onClick={() => setSlot(s)}
-                  className={cx(
-                    "rounded-sm border py-2 text-xs font-medium",
-                    slot === s ? "border-ink-900 bg-ink-900 text-white" : "border-ink-300 text-ink-600 hover:border-ink-500",
-                  )}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-
-            <WButton full>
-              Confirm {day}, {slot}
-            </WButton>
-          </WCard>
-        </div>
+    <PushScreen
+      title="Schedule test drive"
+      footer={<WButton full size="lg">Confirm {day}, {slot}</WButton>}
+    >
+      <div className="mb-1">
+        <WBadge tone="r3">Release 3</WBadge>
       </div>
-    </div>
+      <p className="mb-4 mt-2 text-xs text-ink-500">
+        Pick from Morgan's actual availability — no back-and-forth needed.
+      </p>
+
+      <WCard className="mb-4 flex items-center gap-3">
+        <WImagePlaceholder label="CAR" ratio="4/3" className="w-16" />
+        <div>
+          <p className="text-sm font-semibold text-ink-900">2021 Honda Civic EX</p>
+          <p className="text-xs text-ink-500">Meets at seller's location · Austin, TX</p>
+        </div>
+      </WCard>
+
+      <AnnotationLabel className="mb-2 block">Choose a day</AnnotationLabel>
+      <div className="mb-5 flex gap-2 overflow-x-auto pb-1">
+        {DAYS.map((d) => (
+          <button
+            key={d}
+            onClick={() => setDay(d)}
+            className={cx(
+              "shrink-0 rounded-sm border px-3 py-2 text-xs font-medium",
+              day === d ? "border-ink-900 bg-ink-900 text-white" : "border-ink-300 text-ink-600",
+            )}
+          >
+            {d}
+          </button>
+        ))}
+      </div>
+
+      <AnnotationLabel className="mb-2 block">Choose a time</AnnotationLabel>
+      <div className="grid grid-cols-2 gap-2">
+        {SLOTS.map((s) => (
+          <button
+            key={s}
+            onClick={() => setSlot(s)}
+            className={cx(
+              "rounded-sm border py-2.5 text-xs font-medium",
+              slot === s ? "border-ink-900 bg-ink-900 text-white" : "border-ink-300 text-ink-600",
+            )}
+          >
+            {s}
+          </button>
+        ))}
+      </div>
+    </PushScreen>
   );
 }
