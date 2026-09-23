@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-ink-100 text-ink-900 antialiased;
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background-color: #111214;
+  color: #ffffff;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #c9ccd1;
+  border-radius: 9999px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background-color: transparent;
+}
